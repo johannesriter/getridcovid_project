@@ -106,6 +106,21 @@
           }
         }).addTo(map);
 
+        // Style vaccine
+        const icon_vax = L.icon({
+          iconUrl: "https://www.pngarts.com/files/3/Syringe-PNG-High-Quality-Image.png",
+          iconSize:[30,30]
+        })
+
+        var vaccine_jkt = L.esri.featureLayer({
+          url: "https://services8.arcgis.com/mpSDBlkEzjS62WgX/arcgis/rest/services/spot_vaksinasi_Jakarta_cleansed_view/FeatureServer/0",
+          pointToLayer: (geojson, latlng) => {
+            return L.marker(latlng, {
+              icon: icon_vax
+            });
+          }
+        }).addTo(map);
+
         // Search box for hospital finder
         var arcgisOnline = L.esri.Geocoding.arcgisOnlineProvider({
           apiKey: apiKey
@@ -227,6 +242,10 @@
           return L.Util.template('<b>Faskes : {NAMA_PPK}</b><br><b>Alamat :</b> {ALAMAT_PPK}</br><br><b>Kontak :</b> {CONTACT_PERSON}</br><br><b>Jenis Faskes :</b> {JENIS_FASKES}</br>', layer.feature.properties);
         });
 
+        vaccine_jkt.bindPopup(function (layer) {
+          return L.Util.template('<b>Nama : {namaLokasi}</b><br><b>Alamat :</b> {location}</br><br><b>Tanggal :</b> {dateTime}</br><br><b>Jam Kuota :</b> {jamKuota}</br><br><b>Sisa Kuota :</b> {sisaKuota} orang</br>', layer.feature.properties);
+        });
+
         L.control.scale({
           metric: true,
           imperial: false,
@@ -249,6 +268,14 @@
         }
 
         L.control.watermark({position:'bottomleft'}).addTo(map);
+
+        // Layer control
+        var overlays = {
+          'Faskes': hospital_jkt,
+          'Lokasi Vaksin': vaccine_jkt
+        };
+
+        L.control.layers(null, overlays, {position: 'bottomright'}).addTo(map);
 
     </script>
 </body>
