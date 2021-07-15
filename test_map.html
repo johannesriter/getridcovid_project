@@ -97,8 +97,17 @@
           iconSize:[30,30]
         })
 
+        var hospital_bdg = L.esri.featureLayer({
+          url: "https://services8.arcgis.com/mpSDBlkEzjS62WgX/arcgis/rest/services/Daftar_RumahSakit_JKTBDG_cleansed_view/FeatureServer/0",
+          pointToLayer: (geojson, latlng) => {
+            return L.marker(latlng, {
+              icon: icon
+            });
+          }
+        }).addTo(map);
+
         var hospital_jkt = L.esri.featureLayer({
-          url: "https://services8.arcgis.com/mpSDBlkEzjS62WgX/ArcGIS/rest/services/Daftar_RumahSakitDKI_JAKARTA_cleansed/FeatureServer/0",
+          url: "https://services8.arcgis.com/mpSDBlkEzjS62WgX/arcgis/rest/services/Daftar_RumahSakit_JKTBDG_cleansed_view/FeatureServer/1",
           pointToLayer: (geojson, latlng) => {
             return L.marker(latlng, {
               icon: icon
@@ -126,8 +135,18 @@
           apiKey: apiKey
         });
 
-        var hospitalProvider = L.esri.Geocoding.featureLayerProvider({
-          url: "https://services8.arcgis.com/mpSDBlkEzjS62WgX/ArcGIS/rest/services/Daftar_RumahSakitDKI_JAKARTA_cleansed/FeatureServer/0",
+        var hospitalProvider_jkt = L.esri.Geocoding.featureLayerProvider({
+          url: "https://services8.arcgis.com/mpSDBlkEzjS62WgX/arcgis/rest/services/Daftar_RumahSakit_JKTBDG_cleansed_view/FeatureServer/1",
+          searchFields:['NAMA_PPK'],
+          label: 'Hospital Location',
+          bufferRadius: 100,
+          formatSuggestion: function (feature) {
+            return feature.properties.NAMA_PPK
+          }
+        });
+
+        var hospitalProvider_bdg = L.esri.Geocoding.featureLayerProvider({
+          url: "https://services8.arcgis.com/mpSDBlkEzjS62WgX/arcgis/rest/services/Daftar_RumahSakit_JKTBDG_cleansed_view/FeatureServer/0",
           searchFields:['NAMA_PPK'],
           label: 'Hospital Location',
           bufferRadius: 100,
@@ -138,7 +157,7 @@
 
         L.esri.Geocoding.geosearch({
           placeholder: "Masukkan nama faskes yang ingin anda cari",
-          providers: [hospitalProvider]
+          providers: [hospitalProvider_jkt, hospitalProvider_bdg]
         }).addTo(map);
 
         // // Search box
@@ -238,6 +257,10 @@
         });
 
         // Setup the Popup
+        hospital_bdg.bindPopup(function (layer) {
+          return L.Util.template('<b>Faskes : {NAMA_PPK}</b><br><b>Alamat :</b> {ALAMAT_PPK}</br><br><b>Kontak :</b> {CONTACT_PERSON}</br><br><b>Jenis Faskes :</b> {JENIS_FASKES}</br>', layer.feature.properties);
+        });
+
         hospital_jkt.bindPopup(function (layer) {
           return L.Util.template('<b>Faskes : {NAMA_PPK}</b><br><b>Alamat :</b> {ALAMAT_PPK}</br><br><b>Kontak :</b> {CONTACT_PERSON}</br><br><b>Jenis Faskes :</b> {JENIS_FASKES}</br>', layer.feature.properties);
         });
@@ -271,7 +294,8 @@
 
         // Layer control
         var overlays = {
-          'Faskes': hospital_jkt,
+          'DKI JAKARTA': hospital_jkt,
+          'JAWA BARAT': hospital_bdg,
           'Lokasi Vaksin': vaccine_jkt
         };
 
