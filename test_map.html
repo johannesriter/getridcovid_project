@@ -32,6 +32,17 @@
   <!-- <script src="js/index.js"></script> -->
   <!-- <script src="D:\Training\ESRI_Leaflet\js\controls\search.js"></script> -->
 
+  <!-- Load modal on loading page -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("#modalAing").modal('show');
+      // $("#modalAing").on("shown.bs.modal");
+    });
+  </script>
+
     <style>
         /* html,
         body,
@@ -66,9 +77,60 @@
           font-size: 14px;
           padding: 10px;
         }
+
+        /* For Modal */
+        #modalAing {
+          background-color: rgba(100, 100, 100, 0.39);
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          display: none;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .modal-contents {
+          position: relative;
+          text-align: left;
+        }
     </style>
 </head>
 <body>
+    <div id="modalAing" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="getridModal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-contents">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <img src="https://dl.dropboxusercontent.com/s/6kycakyeenaego5/getridcovid_full100px.png" alt="">
+          <div class="modal-header">
+              <h5 class="modal-title" style="color:white">Halo, Indonesia!</h5>
+          </div>
+          <div class="modal-body">
+              <p style="color:white">Aplikasi SIG ini dapat digunakan untuk mencari lokasi vaksinasi, rumah sakit rujukan Covid-19 dan juga disertai dengan nomor telepon yang dapat dihubungi untuk informasi lebih lanjut.</p>
+              <p style="color:white">Mari kuat bersama, mari bantu sesama :)</p>
+              <p style="color:white">- Created by @johannesriters -</p>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <!-- <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="getridModal" aria-hidden="true">     
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Halo, Indonesia!</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <p>Aplikasi SIG ini dapat digunakan untuk mencari lokasi vaksinasi, rumah sakit rujukan Covid-19 dan juga disertai dengan nomor telepon yang dapat dihubungi untuk informasi lebih lanjut. Mari kuat bersama, mari bantu sesama :)</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
     <div id="map"></div>
     <script>
 
@@ -279,7 +341,7 @@
         L.Control.Watermark=L.Control.extend({
           onAdd:function(map){
             var img = L.DomUtil.create('img');
-            img.src = 'https://dl.dropboxusercontent.com/s/cmpav45twx8t5x6/getridcovid_logo.png';
+            img.src = 'https://dl.dropboxusercontent.com/s/fsfo15fcoiojb9r/getridcovid_logo.png';
             img.style.width = '100px';
             return img;
           },
