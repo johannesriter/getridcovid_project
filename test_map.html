@@ -27,11 +27,6 @@
   <script src="https://unpkg.com/@esri/arcgis-rest-routing@3.0.0/dist/umd/routing.umd.js"></script>
   <script src="https://unpkg.com/@esri/arcgis-rest-auth@3.0.0/dist/umd/auth.umd.js"></script>
 
-  <!-- Load Leaflet search control from CDN -->
-  <!-- <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script> -->
-  <!-- <script src="js/index.js"></script> -->
-  <!-- <script src="D:\Training\ESRI_Leaflet\js\controls\search.js"></script> -->
-
   <!-- Load modal on loading page -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -44,14 +39,7 @@
   </script>
 
     <style>
-        /* html,
-        body,
-        #map {
-          height: 100%;
-          width: 100%;
-          margin: 0;
-          padding: 0;
-        } */
+        html,      
         body { margin:0; padding:0; }
         #map {
           position: absolute;
@@ -130,21 +118,6 @@
         </div>
       </div> 
     </div>
-    <!-- <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="getridModal" aria-hidden="true">     
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title">Halo, Indonesia!</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              <p>Aplikasi SIG ini dapat digunakan untuk mencari lokasi vaksinasi, rumah sakit rujukan Covid-19 dan juga disertai dengan nomor telepon yang dapat dihubungi untuk informasi lebih lanjut. Mari kuat bersama, mari bantu sesama :)</p>
-          </div>
-        </div>
-      </div>
-    </div> -->
 
     <div id="map"></div>
     <script>
@@ -240,15 +213,6 @@
         // add the new control to the map
         var zoomHome = new L.Control.zoomHome();
         zoomHome.addTo(map);
-        
-        // L.easyButton('fa-home',function(btn, map){
-        //   var jakarta = {
-        //     lat: -6.2088,
-        //     lng: 106.8456,
-        //     zoom: 12
-        //   };
-        //   map.setView(jakarta);
-        // }).addTo(map);
 
         // Style hospital
         const icon = L.icon({
@@ -318,33 +282,6 @@
           placeholder: "Masukkan nama faskes yang ingin anda cari",
           providers: [hospitalProvider_jkt, hospitalProvider_bdg]
         }).addTo(map);
-
-        // // Search box
-        // const searchControl = L.esri.Geocoding.geosearch({
-        //   position: "topleft",
-        //   placeholder: "Masukkan alamat yang ingin anda cari",
-        //   useMapBounds: false,
-        //   providers: [L.esri.Geocoding.arcgisOnlineProvider({
-        //     apikey: apiKey,
-        //     nearby: {
-        //       lat: -33.8688,
-        //       lng: 151.2093
-        //     },
-        //   })]
-        // }).addTo(map);
-
-        // const results = L.layerGroup().addTo(map);
-
-        // searchControl.on("results", (data) => {
-        //   results.clearLayers();
-        //   for (let i = data.results.length - 1; i >= 0; i--) {
-        //     const lngLatString = `${Math.round(data.results[i].latlng.lng * 100000)/100000}, ${Math.round(data.results[i].latlng.lat * 100000)/100000}`;
-        //     const marker = L.marker(data.results[i].latlng);
-        //     marker.bindPopup(`<b>${lngLatString}</b><p>${data.results[i].properties.LongLabel}</p>`)
-        //     results.addLayer(marker);
-        //     marker.openPopup();
-        //   }
-        // });
 
         // Add a DOM Node to display the text routing directions
         const directions = document.createElement("div");
