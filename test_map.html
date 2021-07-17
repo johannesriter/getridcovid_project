@@ -27,6 +27,9 @@
   <script src="https://unpkg.com/@esri/arcgis-rest-routing@3.0.0/dist/umd/routing.umd.js"></script>
   <script src="https://unpkg.com/@esri/arcgis-rest-auth@3.0.0/dist/umd/auth.umd.js"></script>
 
+  <!-- Load font awesome from CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <!-- Load modal on loading page -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -142,7 +145,7 @@
             zoomInTitle: 'Zoom In',
             zoomOutText: '-',
             zoomOutTitle: 'Zoom Out',
-            zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
+            zoomHomeText: '<i class="fa fa-home" aria-hidden="true"></i>', // '<i class="fa fa-home" style="line-height:1.65;"></i>'
             zoomHomeTitle: 'Home'
           },
 
