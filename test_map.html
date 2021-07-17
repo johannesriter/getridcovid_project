@@ -133,6 +133,9 @@
           zoomControl: false
         }).setView([-6.2088,106.8456], 9); // Jakarta - Bandung
 
+        // Set the map view to the user's location
+        map.locate({setView: true, maxZoom: 16});
+
         L.esri.basemapLayer(basemapEnum, {
           apiKey: apiKey
         }).addTo(map);
